@@ -2,17 +2,14 @@ import './App.css'
 import RandomCards from './components/RandomCards';
 import Scoreboard from './components/ScoreBoard'
 import { useState, useEffect } from 'react';
-import getPokemonUrl from './js/getPokemonUrl';
-// immer nur eine Karte neu fetchen
-
-const length = 10;
+// Zuerste 30 Karten fetchen und diese immer wieder mischen
+const length = 30;
 
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   // const [selectedItems, setSelectedItems] = useState([]);
   const [cards, setCards] = useState([]);
-  const [nextCard, setNextCard] = useState(null);
   // const [error, setError] = useState(null);
   
 
@@ -39,21 +36,14 @@ function App() {
 
   // Change only one id and shuffle
   async function shuffleCards() {
-    const changedIndex = getRandomInt(length);
-  
     let newCards = [...cards];
-    newCards[changedIndex] = nextCard;
     shuffleArray(newCards);
     setCards(newCards);
-    getPokemonUrl(getRandomInt(1000)+1)
-      .then(card => setNextCard(card));
   }
 
   useEffect(() => {
     generateCards()
       .then(newCards => setCards(newCards));
-    getPokemonUrl(getRandomInt(1000)+1)
-      .then(card => setNextCard(card));
   }, []);
 
 

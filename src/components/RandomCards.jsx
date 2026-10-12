@@ -2,11 +2,11 @@ import Card from "./Card";
 export default function RandomCards({handleClick, cards}) {
     return (
         <div>
-            {cards.map((card) => (
-                <Card key={card.name} 
-                    handleClick={handleClick} 
-                    card={card} 
-                />       
+            {cards.slice(0, 10).map(card => (
+                <Card key={card.id}
+                    handleClick={handleClick}
+                    card={card}
+                />
             ))}
         </div>
     )
