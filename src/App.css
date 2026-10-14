@@ -1,3 +1,12 @@
+:root {
+  --orange: rgba(255, 166, 0, 0.838);
+  --white: whitesmoke;
+  --lightblue: aqua;
+  --button-hover-bg-color: rgb(0, 115, 255); 
+  --font-color: greenyellow;
+  --margin-left: 10px;
+}
+
 #root {
   max-width: 400px;
   margin: 0 auto;
@@ -26,7 +35,7 @@
 .card {
   padding: 0.5rem;
   cursor: pointer;
-  background-color: aqua;
+  background-color: var(--lightblue);
   border-radius: 10%;
   border: solid rgb(143, 211, 40);
 }
@@ -44,11 +53,10 @@
 }
 
 h1, p {
-    color: greenyellow;
+    color: var(--font-color);
 }
 
 h1 {
-    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -60,13 +68,33 @@ h1 {
 }
 
 .scoreboard p {
-    color: greenyellow;
     font-weight: 600;
 }
 
 .scoreboard,
-.description {
-  margin-left: 10px;
+.description,
+.lang {
+  margin-left: var(--margin-left);
+}
+
+.lang {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.lang button {
+  border-radius: 5px;
+  border-color: var(--font-color);
+  border-style: solid;
+  background-color: var(--lightblue);
+}
+
+.lang button:hover,
+.card:hover {
+  background-color: var(--button-hover-bg-color);
+  color: var(--white);
+  border-color: var(--orange);
 }
 
 

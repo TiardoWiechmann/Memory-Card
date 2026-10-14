@@ -79,8 +79,10 @@ function App() {
   return (
     <div>  
       <h1>{lang.heading}</h1>
-      <button onClick={() => setLang(en)}>en</button>
-      <button onClick={() => setLang(de)}>de</button>
+      <div className="lang">
+        <button onClick={() => setLang(en)}>en</button>
+        <button onClick={() => setLang(de)}>de</button>
+      </div>
       <div className="gameboard">
         <p className="description">{lang.description}</p>
         <Scoreboard
