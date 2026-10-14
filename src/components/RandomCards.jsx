@@ -1,8 +1,8 @@
 import Card from "./Card";
 export default function RandomCards({handleClick, cards}) {
     return (
-        <div>
-            {cards.slice(0, 10).map(card => (
+        <div className="cards-container">
+            {cards.slice(0, 12).map(card => (
                 <Card key={card.id}
                     handleClick={handleClick}
                     card={card}

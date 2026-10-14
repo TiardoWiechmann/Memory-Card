@@ -1,1 +1,72 @@
+#root {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1rem;
+  margin: 20px auto;
+}
+
+@media (min-width: 700px) {
+  #root {
+    margin: 0 auto;
+    max-width: 600px;
+  }
+
+  .cards-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: aqua;
+  border-radius: 10%;
+  border: solid rgb(143, 211, 40);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.card figcaption {
+  overflow-wrap: anywhere;
+  height: 3em;
+  overflow: hidden;
+}
+
+h1, p {
+    color: greenyellow;
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.scoreboard {
+    border-radius: 10px;
+    margin: 20px auto;
+    display: flex;
+    gap: 20px;
+}
+
+.scoreboard p {
+    color: greenyellow;
+    font-weight: 600;
+}
+
+.scoreboard,
+.description {
+  margin-left: 10px;
+}
+
 

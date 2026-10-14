@@ -19,7 +19,7 @@ function App() {
     
     try {
     responses = await Promise.all(
-    ids.map(id => fetch(`https://pokapi.co/api/v2/pokemon/${id}`))
+    ids.map(id => fetch(`https://pokeapi.co/api/v2/pokemon/${id}`))
     );
     } catch {
       throw new Error("Server not reachable. Please check your internet connection!");
@@ -70,11 +70,16 @@ function App() {
   return (
     <div>  
       <h1>Pokemon Memory Game</h1>
-      <p>Get points by clicking on an image but don't click on any more than once!</p>   
-      {error 
-        ? <p className="error">Error: {error}</p>
-        : <RandomCards handleClick={increaseScore} cards={cards}/>}
-      <Scoreboard score={currentScore} bestScore={bestScore}/>
+      <div className="gameboard">
+        <p className="description">Get points by clicking on an image but don't click on any more than once!</p>
+        <Scoreboard
+          score={currentScore}
+          bestScore={bestScore}
+        />
+        {error 
+          ? <p className="error">Error: {error}</p>
+          : <RandomCards handleClick={increaseScore} cards={cards}/>}
+      </div>
     </div>
   )
 }

@@ -1,9 +1,9 @@
 export default function Scoreboard({score, bestScore}){
     return (
-        <>
+        <div className="scoreboard">
             <Score score={score} />
             <BestScore bestScore={bestScore} />
-        </>
+        </div>
     )
 }
 
