@@ -1,20 +1,20 @@
-export default function Scoreboard({score, bestScore}){
+export default function Scoreboard({score, bestScore, lang}){
     return (
         <div className="scoreboard">
-            <Score score={score} />
-            <BestScore bestScore={bestScore} />
+            <Score score={score} lang={lang}/>
+            <BestScore bestScore={bestScore} lang={lang}/>
         </div>
     )
 }
 
-function Score({score}) {
+function Score({score, lang}) {
     return (
-        <p>Score: {score}</p>
+        <p>{lang.score}: {score}</p>
     )
 }
 
-function BestScore({bestScore}){
+function BestScore({bestScore, lang}){
     return (
-        <p>Best Score: {bestScore}</p>
+        <p>{lang.bestScore}: {bestScore}</p>
     )
 }

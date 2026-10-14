@@ -2,6 +2,7 @@ import './App.css'
 import RandomCards from './components/RandomCards';
 import Scoreboard from './components/ScoreBoard'
 import { useState, useEffect } from 'react';
+import { de, en } from './js/languages.js';
 
 const NUMBER_OF_IDS = 30;
 
@@ -11,6 +12,7 @@ function App() {
   const [visitedCards, setVisitedCards] = useState([]);
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
+  const [lang, setLang] = useState(en);
   
 
   async function generateCards() {
@@ -18,24 +20,31 @@ function App() {
     let responses;
     
     try {
-    responses = await Promise.all(
-    ids.map(id => fetch(`https://pokeapi.co/api/v2/pokemon/${id}`))
+      responses = await Promise.all(
+      ids.map(id => fetch(`https://pokeapi.co/api/v2/pokemon/${id}`))
     );
     } catch {
-      throw new Error("Server not reachable. Please check your internet connection!");
+      throw new Error(lang.serverError);
     }
 
      const failed = responses.find(r => !r.ok);
      if (failed) {
-      throw new Error(`Pokémons couldn't get loaded (Status ${failed.status})`);
+      throw new Error(lang.findIdError(failed.status));
      }
 
-     const pokemons = await Promise.all(responses.map(r => r.json()));
+     const pokemons = await Promise.all(responses.map(r => r.json())); 
 
-     return pokemons.map(pokemon => ({
+     const speciesList = await Promise.all(
+      pokemons.map(pokemon => fetch(pokemon.species.url).then(r => r.json()))
+     )
+
+     return pokemons.map((pokemon, index) => ({
       url: pokemon.sprites.front_default,
-      name: pokemon.name,
       id: pokemon.id,
+      names: {
+        en: pokemon.name,
+        de: findName(speciesList[index], "de") ?? pokemon.name,
+      },
      }));
   }
 
@@ -44,7 +53,7 @@ function App() {
     if (visitedCards.includes(card.id)){
       setCurrentScore(0);
       setVisitedCards([]);
-      alert(`Game Over! ${card.name} was already visited!`);
+      alert(lang.gameOver(card));
     }
     else {
       setCurrentScore(currentScore + 1);
@@ -69,16 +78,19 @@ function App() {
 
   return (
     <div>  
-      <h1>Pokemon Memory Game</h1>
+      <h1>{lang.heading}</h1>
+      <button onClick={() => setLang(en)}>en</button>
+      <button onClick={() => setLang(de)}>de</button>
       <div className="gameboard">
-        <p className="description">Get points by clicking on an image but don't click on any more than once!</p>
+        <p className="description">{lang.description}</p>
         <Scoreboard
           score={currentScore}
           bestScore={bestScore}
+          lang={lang}
         />
         {error 
-          ? <p className="error">Error: {error}</p>
-          : <RandomCards handleClick={increaseScore} cards={cards}/>}
+          ? <p className="error">{lang.error}: {error}</p>
+          : <RandomCards handleClick={increaseScore} cards={cards} lang={lang}/>}
       </div>
     </div>
   )
@@ -110,4 +122,8 @@ function shuffleArray(array) {
     let j = Math.floor(Math.random() * (i+1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+}
+
+function findName(species, lang) {
+  return species.names.find(n => n.language.name === lang)?.name;
 }
