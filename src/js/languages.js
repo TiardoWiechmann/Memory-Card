@@ -27,7 +27,7 @@ export const en = {
         return `Pokémons couldn't get loaded (Status ${status})`
     },
     score: "Score",
-    bestScore: "Beste Score",
+    bestScore: "Best Score",
     pokemonName(card) {
         return card.names.en;
     },

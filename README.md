@@ -1,13 +1,7 @@
-# React Template
+# Pokémon Memory Game
 
-## Requirements
-- scoreboard: 
- - Score: counts current score
- - Best Score: highest score so far
-- Function that displays 10 cards in a random order anytime a user clicks one
- - component should be invoked when the component mounts
-- cards that display images and possibly informational text
- - images and texts need to be fetched from an external API (Giphy, Pokemon API)
+A memory card game built with React and Vite with multi language support (english and german).
 
-## Structure
--  
+Click on a Pokémon to score a point. After every click, the cards are shuffled. Click the same Pokémon twice and the game is over.
+
+👉 **[Live Demo](https://memory-game-tiardo.netlify.app/)**
