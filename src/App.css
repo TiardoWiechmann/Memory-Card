@@ -90,8 +90,7 @@ h1 {
   background-color: var(--lightblue);
 }
 
-.lang button:hover,
-.card:hover {
+.lang button:hover {
   background-color: var(--button-hover-bg-color);
   color: var(--white);
   border-color: var(--orange);
